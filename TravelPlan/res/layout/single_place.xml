@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dip"
+    android:weightSum="1">
+
+    <!-- Name Label -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView" />
+    <TextView
+        android:text="Name:"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="5dip"
+        android:textStyle="bold"/>
+
+    <!--  Name Value -->
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Address Label -->
+    <TextView
+        android:text="Address:"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:layout_marginBottom="5dip"
+        android:textStyle="bold"
+        android:autoLink="map"/>
+
+    <!--  Address Value -->
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="map"/>
+
+    <!-- Phone Number Label -->
+    <TextView
+        android:text="Phone No:"
+
+        android:id="@+id/phone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:autoLink="phone"
+        android:textStyle="bold" />
+
+
+    <!-- Location Value -->
+    <TextView
+        android:text="Location Details:"
+
+        android:id="@+id/location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:layout_marginBottom="5dip"
+        android:textStyle="bold" />
+    <TextView
+        android:text="Website:"
+
+        android:id="@+id/website"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:layout_marginBottom="5dip"
+        android:autoLink="web"
+        android:textStyle="bold" />
+
+    <TextView
+        android:text="Ratings:"
+
+        android:id="@+id/rating"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:layout_marginBottom="5dip"
+        android:textStyle="bold"
+        android:layout_weight="0.05" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar"
+        android:clickable="false"
+        android:isIndicator="true"
+        android:rating="0"
+        />
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TravelPlan</string>
+    <string name="hello_world">Hello</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_search_screen">SearchScreen</string>
+    <string name="title_activity_places_screen">PlacesScreen</string>
+    <string name="title_activity_directions_screen" />
+    <string name="title_activity_manual_navigation_screen" />
+    <string name="title_activity_travel_list" />
+    <string name="title_activity_create_trip_screen" />
+    <string name="dialog_screen_yes">Yes</string>
+    <string name="dialog_screen_no">No</string>
+    <string name="dialog_screen_title">Please confirm</string>
+    <string name="dialog_screen_message">Are you sure you want to create this travel list?</string>
+    <string name="dialog_screen_ok">OK</string>
+
+    <string name="desc_CN">In 58 seconds you will find yourself at a height of 346m. The LookOut level offers breathtaking views and Horizons Restaurant. Also located on this level is one of many souvenir photo opportunities.</string>
+    <string name="desc_Niagara">When you visit Niagara Falls Canada you will find, eclectic restaurants, contemporary hotels, and electrifying attractions!  Niagara Falls is a true Canadian vacation destination for couples and families alike. Grown ups have upscale hotels, modern casinos, nightlife and concerts, fine dining, golf courses and spas, and wine country is just down the road. For children, Niagara Falls is a veritable theme park with ultra tall buildings (Skylon Tower), water parks inside hotels, climate controlled Ferris wheel and kid-friendly restaurants (Clifton Hill), the Butterfly Conservatory, Marineland and lets not forget the Falls!</string>
+    <string name="desc_Wonderland">It is really no wonder that Canada s Wonderland is Canada s premiere amusement park. It is where families come to spend quality time with each other and their good friends, g-forces. Only Canada s premiere amusement park has Leviathan, a new roller coaster in 2012 that boasts speeds of 125 mph with an 80-degree drop. Canada s premiere amusement park also features such thrilling rides as Vortex, Shockwave, Behemoth and the 301-foot WindSeeker. And for the kids, there is Planet Snoopy and the new Dinosaurs Alive! Seven acres of Jurassic fun with over 40 life-sized dinos. And if you like water park thrills, Canada s premiere amusement park features Splash Works, a 20-acre water park featuring The Plunge, Super Soaker, the Lazy River and enough thrill rides to leave you and your family closer and prunier than ever. It is what happens here every day at Canada s premiere amusement park.</string>
+    <string name="desc_Casaloma"></string>
+    <string name="desc_Stanley"></string>
+    <string name="desc_SaltSpring"></string>
+    <string name="desc_LaCitadelle"></string>
+    <string name="desc_Basilique"></string>
+    <string name="desc_Musee"></string>
+    <string name="desc_Vieux"></string>
+    <string name="desc_Rogers"></string>
+    <string name="desc_CanCanoe"></string>
+    <string name="desc_NatGallery"></string>
+    <string name="desc_RoyalOnt"></string>
+    <string name="desc_GrahamBell"></string>
+    <string name="desc_noinfo">N/A</string>
+
+    <string name="place_CN">CN Tower</string>
+
+</resources>

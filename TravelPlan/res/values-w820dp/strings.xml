@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_directions_screen" />
+    <string name="title_activity_manual_navigation_screen" />
+    <string name="title_activity_travel_list" />
+    <string name="title_activity_create_trip_screen" />
+</resources>
