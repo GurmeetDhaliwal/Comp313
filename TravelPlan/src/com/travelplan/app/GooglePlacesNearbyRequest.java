@@ -27,7 +27,7 @@ public class GooglePlacesNearbyRequest {
 	private static final String PLACES_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/search/json?";
 	private static final String PLACES_TEXT_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 	private static final String PLACES_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json?";
-private  String temp = "";
+	private  String temp = "";
 	private double _latitude;
 	private double _longitude;
 	private double _radius;
@@ -61,7 +61,7 @@ try{
             request.getUrl().put("location", _latitude + "," + _longitude);
             request.getUrl().put("radius", _radius); // in meters
             request.getUrl().put("sensor", "false");
-        request.getUrl().put("types", types);
+            request.getUrl().put("types", types);
 			PlacesList list = request.execute().parseAs(PlacesList.class);
 			// Check log cat for places response status
 			Log.d("Places Status", "" + list.status);
@@ -84,8 +84,7 @@ try{
 		try {
 
 			HttpRequestFactory httpRequestFactory = createRequestFactory(HTTP_TRANSPORT);
-			HttpRequest request = httpRequestFactory
-					.buildGetRequest(new GenericUrl(PLACES_DETAILS_URL));
+			HttpRequest request = httpRequestFactory.buildGetRequest(new GenericUrl(PLACES_DETAILS_URL));
 			request.getUrl().put("key", API_KEY);
 			request.getUrl().put("reference", reference);
 			request.getUrl().put("sensor", "false");

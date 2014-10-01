@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.travelplan.app"
     android:versionCode="1"
-    android:versionName="1.0"  >
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="19" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.testmaps.com.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,19 +27,18 @@
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"  >
-
+        android:label="@string/app_name" >
         <activity
-            android:name="com.travelplan.app.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="com.travelplan.app.MainActivity" />
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.travelplan.app.PlacesScreen"
+            android:name=".PlacesScreen"
             android:label="@string/title_activity_places_screen" >
             <intent-filter>
                 <action android:name="com.travelplan.app.PlacesScreen" />
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.travelplan.app.DirectionsScreen"
+            android:name=".DirectionsScreen"
             android:label="@string/title_activity_directions_screen" >
             <intent-filter>
                 <action android:name="com.travelplan.app.DirectionsScreen" />
@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.travelplan.app.ManualNavigationScreen"
+            android:name=".ManualNavigationScreen"
             android:label="@string/title_activity_manual_navigation_screen" >
             <intent-filter>
                 <action android:name="com.travelplan.app.ManualNavigationScreen" />
@@ -65,7 +65,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.travelplan.app.TravelList"
+            android:name=".TravelList"
             android:label="@string/title_activity_travel_list" >
             <intent-filter>
                 <action android:name="com.travelplan.app.TravelList" />
@@ -74,7 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.travelplan.app.CreateTripScreen"
+            android:name=".CreateTripScreen"
             android:label="@string/title_activity_create_trip_screen" >
             <intent-filter>
                 <action android:name="com.travelplan.app.CreateTripScreen" />
@@ -83,19 +83,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.travelplan.app.SearchScreen"
+            android:name=".SearchScreen"
             android:label="@string/title_activity_search_screen" >
-            <intent-filter><action android:name="com.travelplan.app.SearchScreen"/><category android:name="android.intent.category.DEFAULT"/> </intent-filter>
+            <intent-filter>
+                <action android:name="com.travelplan.app.SearchScreen" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
-            android:name="com.travelplan.app.NearBySearch"
+            android:name=".NearBySearch"
             android:label="@string/title_activity_search_screen" >
-            <intent-filter><action android:name="com.travelplan.app.NearBySearch"/><category android:name="android.intent.category.DEFAULT"/> </intent-filter>
+            <intent-filter>
+                <action android:name="com.travelplan.app.NearBySearch" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
-            android:name="com.travelplan.app.SinglePlaceActivity"
+            android:name=".SinglePlaceActivity"
             android:label="@string/title_activity_search_screen" >
-            <intent-filter><action android:name="com.testmaps.app.SinglePlaceActivity"/><category android:name="android.intent.category.DEFAULT"/> </intent-filter>
+            <intent-filter>
+                <action android:name="com.testmaps.app.SinglePlaceActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SearchResultsActivity"
+            android:label="@string/title_activity_search_results" >
         </activity>
     </application>
 

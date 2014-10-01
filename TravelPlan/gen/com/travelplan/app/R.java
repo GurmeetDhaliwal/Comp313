@@ -10,14 +10,18 @@ package com.travelplan.app;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int black=0x7f040000;
+        public static final int white=0x7f040001;
+    }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
  Example customization of dimensions originally defined in res/values/dimens.xml
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). 
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int background=0x7f020000;
@@ -27,51 +31,50 @@ public final class R {
         public static final int loader=0x7f020004;
         public static final int mark_blue=0x7f020005;
         public static final int mark_red=0x7f020006;
-        public static final int success=0x7f020007;
+        public static final int mount_odin=0x7f020007;
+        public static final int success=0x7f020008;
     }
     public static final class id {
-        public static final int ExpList=0x7f080010;
-        public static final int action_settings=0x7f080029;
-        public static final int address=0x7f080023;
-        public static final int autoCompTxtSearch=0x7f080009;
-        public static final int btnAddPlace=0x7f080018;
-        public static final int btnCreate=0x7f080005;
-        public static final int btnCreateTrip=0x7f08000d;
-        public static final int btnGetDirection=0x7f080011;
-        public static final int btnHome=0x7f080008;
-        public static final int btnManualNavigation=0x7f08000c;
-        public static final int btnSearch=0x7f08000a;
-        public static final int btnShowTravelLists=0x7f080006;
-        public static final int btnTravelList=0x7f08000f;
-        public static final int container=0x7f080021;
-        public static final int datePickerFrom=0x7f080002;
-        public static final int datePickerTo=0x7f080004;
-        public static final int frameLyt_PlaceDescription=0x7f080012;
-        public static final int imageView=0x7f080022;
-        public static final int imgSelectedPlace=0x7f080015;
-        public static final int list=0x7f080020;
-        public static final int listTravelLists=0x7f08001a;
-        public static final int location=0x7f080025;
-        public static final int name=0x7f08001f;
-        public static final int phone=0x7f080024;
-        public static final int rating=0x7f080027;
-        public static final int ratingBar=0x7f080028;
-        public static final int reference=0x7f08001e;
-        public static final int search=0x7f08000e;
-        public static final int textDestination=0x7f080000;
-        public static final int textView=0x7f080019;
-        public static final int textViewSearch=0x7f08000b;
-        public static final int tvChild=0x7f08001c;
-        public static final int tvGroup=0x7f08001d;
-        public static final int txtCreatedTravelList=0x7f080007;
-        public static final int txtDateTo=0x7f080003;
-        public static final int txtFromDate=0x7f080001;
-        public static final int txtSearchResult=0x7f080017;
-        public static final int txtSelectedPlace=0x7f080013;
-        public static final int txtSelectedPlaceDesc=0x7f080014;
-        public static final int txtSelectedTravelList=0x7f080016;
-        public static final int txtShowResults=0x7f08001b;
-        public static final int website=0x7f080026;
+        public static final int ExpList=0x7f09000b;
+        public static final int action_settings=0x7f090027;
+        public static final int address=0x7f090021;
+        public static final int autoCompTxtSearch=0x7f090005;
+        public static final int btnAddPlace=0x7f090018;
+        public static final int btnCreate=0x7f090003;
+        public static final int btnCreateTrip=0x7f090007;
+        public static final int btnGetDirection=0x7f09000c;
+        public static final int btnHome=0x7f090004;
+        public static final int btnManualNavigation=0x7f090009;
+        public static final int btnSearch=0x7f090006;
+        public static final int btnShowTravelLists=0x7f090002;
+        public static final int btnTravelList=0x7f09000a;
+        public static final int container=0x7f09001f;
+        public static final int expListTravelLists=0x7f090019;
+        public static final int frameLayout1=0x7f090013;
+        public static final int frameLyt_PlaceDescription=0x7f09000d;
+        public static final int imageView=0x7f090020;
+        public static final int imgSelectedPlace=0x7f090010;
+        public static final int list=0x7f09001e;
+        public static final int listSearchResults=0x7f090014;
+        public static final int location=0x7f090023;
+        public static final int name=0x7f09001d;
+        public static final int phone=0x7f090022;
+        public static final int rating=0x7f090025;
+        public static final int ratingBar=0x7f090026;
+        public static final int reference=0x7f09001c;
+        public static final int search=0x7f090008;
+        public static final int seekBarRange=0x7f090016;
+        public static final int textDestination=0x7f090000;
+        public static final int textView=0x7f090015;
+        public static final int tvChild=0x7f09001a;
+        public static final int tvGroup=0x7f09001b;
+        public static final int txtCreatedTravelList=0x7f090001;
+        public static final int txtResults=0x7f090012;
+        public static final int txtSearchResult=0x7f090017;
+        public static final int txtSelectedPlace=0x7f09000e;
+        public static final int txtSelectedPlaceDesc=0x7f09000f;
+        public static final int txtSelectedTravelList=0x7f090011;
+        public static final int website=0x7f090024;
     }
     public static final class layout {
         public static final int activity_create_trip_screen=0x7f030000;
@@ -80,60 +83,66 @@ public final class R {
         public static final int activity_manual_naviation_screen=0x7f030003;
         public static final int activity_manual_navigation_screen=0x7f030004;
         public static final int activity_places_screen=0x7f030005;
-        public static final int activity_search_screen=0x7f030006;
-        public static final int activity_travel_list=0x7f030007;
-        public static final int expandlist_child_item=0x7f030008;
-        public static final int expandlist_group_item=0x7f030009;
-        public static final int fragment_main=0x7f03000a;
-        public static final int fragment_search_screen=0x7f03000b;
-        public static final int list_item=0x7f03000c;
-        public static final int search_results=0x7f03000d;
-        public static final int search_screen=0x7f03000e;
-        public static final int single_place=0x7f03000f;
+        public static final int activity_search_results=0x7f030006;
+        public static final int activity_search_screen=0x7f030007;
+        public static final int activity_travel_list=0x7f030008;
+        public static final int expandlist_child_item=0x7f030009;
+        public static final int expandlist_group_item=0x7f03000a;
+        public static final int fragment_main=0x7f03000b;
+        public static final int fragment_search_screen=0x7f03000c;
+        public static final int list_item=0x7f03000d;
+        public static final int search_results=0x7f03000e;
+        public static final int search_screen=0x7f03000f;
+        public static final int single_place=0x7f030010;
     }
     public static final class menu {
-        public static final int create_trip_screen=0x7f070000;
-        public static final int directions_screen=0x7f070001;
-        public static final int main=0x7f070002;
-        public static final int manual_naviation_screen=0x7f070003;
-        public static final int manual_navigation_screen=0x7f070004;
-        public static final int places_screen=0x7f070005;
-        public static final int search_screen=0x7f070006;
-        public static final int travel_list=0x7f070007;
+        public static final int create_trip_screen=0x7f080000;
+        public static final int directions_screen=0x7f080001;
+        public static final int main=0x7f080002;
+        public static final int manual_naviation_screen=0x7f080003;
+        public static final int manual_navigation_screen=0x7f080004;
+        public static final int places_screen=0x7f080005;
+        public static final int search_results=0x7f080006;
+        public static final int search_screen=0x7f080007;
+        public static final int travel_list=0x7f080008;
     }
     public static final class string {
-        public static final int action_settings=0x7f050003;
-        public static final int app_name=0x7f050001;
-        public static final int desc_Basilique=0x7f050016;
-        public static final int desc_CN=0x7f05000f;
-        public static final int desc_CanCanoe=0x7f05001a;
-        public static final int desc_Casaloma=0x7f050012;
-        public static final int desc_GrahamBell=0x7f05001d;
-        public static final int desc_LaCitadelle=0x7f050015;
-        public static final int desc_Musee=0x7f050017;
-        public static final int desc_NatGallery=0x7f05001b;
-        public static final int desc_Niagara=0x7f050010;
-        public static final int desc_Rogers=0x7f050019;
-        public static final int desc_RoyalOnt=0x7f05001c;
-        public static final int desc_SaltSpring=0x7f050014;
-        public static final int desc_Stanley=0x7f050013;
-        public static final int desc_Vieux=0x7f050018;
-        public static final int desc_Wonderland=0x7f050011;
-        public static final int desc_noinfo=0x7f05001e;
-        public static final int dialog_screen_message=0x7f05000d;
-        public static final int dialog_screen_no=0x7f05000b;
-        public static final int dialog_screen_ok=0x7f05000e;
-        public static final int dialog_screen_title=0x7f05000c;
-        public static final int dialog_screen_yes=0x7f05000a;
-        public static final int hello_world=0x7f050002;
-        public static final int maps_api_key=0x7f050000;
-        public static final int place_CN=0x7f05001f;
-        public static final int title_activity_create_trip_screen=0x7f050009;
-        public static final int title_activity_directions_screen=0x7f050006;
-        public static final int title_activity_manual_navigation_screen=0x7f050007;
-        public static final int title_activity_places_screen=0x7f050005;
-        public static final int title_activity_search_screen=0x7f050004;
-        public static final int title_activity_travel_list=0x7f050008;
+        public static final int action_settings=0x7f060003;
+        public static final int app_name=0x7f060001;
+        public static final int desc_Basilique=0x7f060011;
+        public static final int desc_CN=0x7f06000a;
+        public static final int desc_CanCanoe=0x7f060015;
+        public static final int desc_Casaloma=0x7f06000d;
+        public static final int desc_GrahamBell=0x7f060018;
+        public static final int desc_LaCitadelle=0x7f060010;
+        public static final int desc_Musee=0x7f060012;
+        public static final int desc_NatGallery=0x7f060016;
+        public static final int desc_Niagara=0x7f06000b;
+        public static final int desc_Rogers=0x7f060014;
+        public static final int desc_RoyalOnt=0x7f060017;
+        public static final int desc_SaltSpring=0x7f06000f;
+        public static final int desc_Stanley=0x7f06000e;
+        public static final int desc_Vieux=0x7f060013;
+        public static final int desc_Wonderland=0x7f06000c;
+        public static final int desc_noinfo=0x7f060019;
+        public static final int dialog_screen_message=0x7f060023;
+        public static final int dialog_screen_message_create_travel_list=0x7f06001f;
+        public static final int dialog_screen_message_delete_place=0x7f060020;
+        public static final int dialog_screen_message_delete_travel_list=0x7f060021;
+        public static final int dialog_screen_no=0x7f06001d;
+        public static final int dialog_screen_ok=0x7f060022;
+        public static final int dialog_screen_title=0x7f06001e;
+        public static final int dialog_screen_yes=0x7f06001c;
+        public static final int hello_world=0x7f060002;
+        public static final int maps_api_key=0x7f060000;
+        public static final int place_CN=0x7f06001a;
+        public static final int title_activity_create_trip_screen=0x7f060009;
+        public static final int title_activity_directions_screen=0x7f060006;
+        public static final int title_activity_manual_navigation_screen=0x7f060007;
+        public static final int title_activity_places_screen=0x7f060005;
+        public static final int title_activity_search_results=0x7f06001b;
+        public static final int title_activity_search_screen=0x7f060004;
+        public static final int title_activity_travel_list=0x7f060008;
     }
     public static final class style {
         /** 
@@ -148,6 +157,6 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
     }
 }

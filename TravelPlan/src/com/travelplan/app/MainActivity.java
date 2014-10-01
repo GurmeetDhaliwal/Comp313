@@ -14,15 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 
-    String[] places = new String[] { "CN Tower", "Niagara Falls", "Wonderland", "Casa Loma", "Stanley Park Seawall",
-                                    "Salt Spring Island", "La Citadelle", "Basilique Notre-Dame", "Musee de la Civilisation",
-                                    "Vieux-Port de Montreal", "Rogers Center", "Canadian Canoe Museum",
-                                    "National Gallery of Canada", "Royal Ontario Museum",
-                                    "Alexander Graham Bell National Historic Site" };
-    boolean placeSelectedFromString=false;
+	TextView searchText;  
     AutoCompleteTextView autoComp;
     AlertDialogManager alert = new AlertDialogManager();
 
@@ -49,14 +46,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
         btnTravelList.setOnClickListener(this);
 
         autoComp = (AutoCompleteTextView)findViewById(R.id.autoCompTxtSearch);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, places);
-        autoComp.setAdapter(adapter);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, places);
+        //autoComp.setAdapter(adapter);
 
         autoComp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView <?> parent, View arg1, int pos,long id) {
-                placeSelectedFromString=true;
+                //placeSelectedFromString=true;
             }
         });
 
@@ -73,7 +70,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
             @Override
             public void afterTextChanged(Editable editable) {
-                placeSelectedFromString=false;
+                //placeSelectedFromString=false;
             }
         });
 
@@ -142,15 +139,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
         startActivity(new Intent("com.travelplan.app.NearBySearch"));
     }
     private void btnSearchClicked(){
-        AutoCompleteTextView textQuery = (AutoCompleteTextView) findViewById(R.id.autoCompTxtSearch);
-        String text;
-        text = textQuery.getText().toString();
+        String value="";
+    	value=autoComp.getText().toString();
+    	Intent i = new Intent(this, SearchResultsActivity.class);
+    	i.putExtra("keyword", value);
+    	startActivity(i); 
+        
+        /*text = textQuery.getText().toString();
         if(textQuery.length()==0)
         {
             alert.showAlertDialog(this, "Input Error",
                     "Please enter a name of the place.",
                     false);
-        } else if (placeSelectedFromString==true)
+        } 
+        else if (placeSelectedFromString==true)
         {
             try
             {
@@ -169,10 +171,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
         else if(placeSelectedFromString==false)
         {
-            Intent i = new Intent(this, SearchScreen.class);
-            i.putExtra("text", text);
+            Intent i = new Intent(getApplicationContext(), SearchResultsActivity.class);
+            i.putExtra("KEYWORD", autoComp.getText());
+            Toast.makeText(getApplicationContext(), autoComp.getText(), Toast.LENGTH_SHORT).show();
             startActivity(i);
-        }
+        }*/
 
     }
 }

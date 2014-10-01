@@ -25,8 +25,7 @@ public class CreateTripScreen extends Activity implements View.OnClickListener {
 
     EditText txtDestination;
     TextView txtCreatedTravelList;
-    DatePicker datePickerFrom;
-    DatePicker datePickerTo;
+
     int count=0;
 
     @Override
@@ -41,8 +40,6 @@ public class CreateTripScreen extends Activity implements View.OnClickListener {
             btnShowTravelLists.setOnClickListener(this);
 
             txtDestination=(EditText)findViewById(R.id.textDestination);
-            datePickerFrom=(DatePicker)findViewById(R.id.datePickerFrom);
-            datePickerTo= (DatePicker)findViewById(R.id.datePickerTo);
 
             txtCreatedTravelList=(TextView)findViewById(R.id.txtCreatedTravelList);
 
@@ -144,7 +141,7 @@ public class CreateTripScreen extends Activity implements View.OnClickListener {
             }
             try {
                 BufferedWriter buf = new BufferedWriter(new FileWriter(textFile, true));
-                buf.append(text.toUpperCase()+"--- From: "+ setDate(datePickerFrom)+" - To: "+setDate(datePickerTo));
+                buf.append(text.toUpperCase());
                 buf.newLine();
                 buf.close();
             } catch (IOException e) {
@@ -157,10 +154,10 @@ public class CreateTripScreen extends Activity implements View.OnClickListener {
         }
     }
 
-    public String setDate(DatePicker date)
+    /*public String setDate(DatePicker date)
     {
         String editedDate;
         editedDate=date.getMonth()+"."+date.getDayOfMonth()+"."+date.getYear();
         return editedDate;
-    }
+    }*/
 }
