@@ -91,7 +91,6 @@ public class PlacesScreen extends Activity implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId())
         {
-
             case R.id.btnHome:
                 btnHomeClicked();
                 break;

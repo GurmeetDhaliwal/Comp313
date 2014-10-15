@@ -1,19 +1,29 @@
 package com.travelplan.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class SinglePlaceActivity extends Activity {
@@ -21,23 +31,22 @@ public class SinglePlaceActivity extends Activity {
 	Boolean isInternetPresent = false;
 
 	// Connection detector class
-	ConnectionDetector cd;
-	
+	ConnectionDetector cd;	
 	// Alert Dialog Manager
 	AlertDialogManager alert = new AlertDialogManager();
-
 	// Google Places
-	GooglePlaces googlePlaces;
-	
+	GooglePlaces googlePlaces;	
 	// Place Details
-	PlaceDetails placeDetails;
-	
+	PlaceDetails placeDetails;	
 	// Progress dialog
-	ProgressDialog pDialog;
-	
+	ProgressDialog pDialog;	
 	// KEY Strings
 	public static String KEY_REFERENCE = "reference"; // id of the place
 
+	Button btnAddList;
+	TextView txtPlaceName;
+	ListView lstViewCreatedTravelLists;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -51,8 +60,50 @@ public class SinglePlaceActivity extends Activity {
 		
 		// Calling a Async Background thread
 		new LoadSinglePlaceDetails().execute(reference);
+		
+		btnAddList=(Button)findViewById(R.id.btnAddPlace);
+		txtPlaceName=(TextView)findViewById(R.id.name);
+		
+		btnAddList.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				/*lstViewCreatedTravelLists=new ListView(this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(SinglePlaceActivity.this);
+
+
+		        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+		        lstViewCreatedTravelLists.setAdapter(adapter);
+		        builder.setTitle("Choose a travel list")
+		               .setView(lstViewCreatedTravelLists);
+		        
+				addPlaceToSelectedTravelList(txtPlaceName.getText(), travelList)*/
+			}
+		});
 	}
 	
+	 public void addPlaceToSelectedTravelList(String place, String travelList) {
+	        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
+	        {
+	            Log.e("External Storage Status: -> ","OK! <-");
+
+	            File dir=new File(Environment.getExternalStorageDirectory()+"/TravelPlan");
+	            dir.mkdirs();
+	            File textFile = new File(dir+"/"+travelList+".txt");
+	            try {
+	                BufferedWriter buf = new BufferedWriter(new FileWriter(textFile, true));
+	                buf.append(place.toUpperCase());
+	                buf.newLine();
+	                buf.close();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        else
+	        {
+	            Log.e("External Storage Status: -> ","Failed! <-");
+	        }
+	    }
 	
 	/**
 	 * Background Async Task to Load Google places

@@ -34,7 +34,10 @@ public class SearchResultsActivity extends Activity {
     ProgressDialog pDialog;
     ListView lvResults;
     SeekBar rangeModifier;
-    int range=1000;
+    TextView txtRange;
+    int range=0;
+    // Searched keyword value
+    String value;
     
     ArrayList<HashMap<String, String>> lstPlaces = new ArrayList<HashMap<String,String>>();
 	
@@ -50,10 +53,13 @@ public class SearchResultsActivity extends Activity {
 		
 		// get data from previous intent		
 		Intent i=getIntent();
-		String value = i.getExtras().getString("keyword");
+		value = i.getExtras().getString("keyword");
 		// set data to textview
 		TextView resultsTxt= (TextView) findViewById(R.id.txtResults);	
 		resultsTxt.setText("Searched Keyword: "+ value);
+		
+        lvResults = (ListView) findViewById(R.id.listSearchResults);
+		txtRange=(TextView) findViewById(R.id.textViewRange);
 		
 		rangeModifier=(SeekBar) findViewById(R.id.seekBarRange);
 		rangeModifier.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -61,6 +67,7 @@ public class SearchResultsActivity extends Activity {
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
 				new LoadPlaces().execute();
+				txtRange.setText("Range: "+(range)*10000+" meters");
 			}
 			
 			@Override
@@ -73,11 +80,9 @@ public class SearchResultsActivity extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				range=progress;	
 				lstPlaces.clear();
+				
 			}
 		});
-		
-		
-        lvResults = (ListView) findViewById(R.id.listSearchResults);
 		
 		// check connection
 		cd = new ConnectionDetector(getApplicationContext());
@@ -114,7 +119,6 @@ public class SearchResultsActivity extends Activity {
                 startActivity(i);
             }
         });
-		
 	}
 
 	@Override
@@ -162,7 +166,7 @@ public class SearchResultsActivity extends Activity {
                 		"|park|restaurant|shopping_mall|zoo";
 
                 // Radius in meters
-                double radius = range;
+                double radius = (range+1)*10000;
 
                 // get nearest places
                 nearPlaces = googlePlaces.search(gps.getLatitude(), gps.getLongitude(), radius, types);
@@ -196,18 +200,17 @@ public class SearchResultsActivity extends Activity {
                     if (nearPlaces.results != null) {
                         // loop through each place
                         for (Place p : nearPlaces.results) {
-                            HashMap<String, String> map = new HashMap<String, String>();
-
-                            // Place reference won't display in listview - it will be hidden
-                            // Place reference is used to get "place full details"
-                            map.put(KEY_REFERENCE, p.reference);
-
-                            // Place name
-                            map.put(KEY_NAME, p.name);
-
-
-                            // adding HashMap to ArrayList
-                            lstPlaces.add(map);
+                        	if(p.name.toUpperCase().contains(value.toUpperCase()))
+                        	{
+	                            HashMap<String, String> map = new HashMap<String, String>();
+	                            // Place reference won't display in listview - it will be hidden
+	                            // Place reference is used to get "place full details"
+	                            map.put(KEY_REFERENCE, p.reference);	
+	                            // Place name
+	                            map.put(KEY_NAME, p.name.toUpperCase());
+	                            // adding HashMap to ArrayList
+	                            lstPlaces.add(map);
+                        	}
                         }
                         // list adapter
                         ListAdapter adapter = new SimpleAdapter(SearchResultsActivity.this, lstPlaces,

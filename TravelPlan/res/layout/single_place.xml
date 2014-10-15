@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView" />
+
     <TextView
         android:text="Name:"
         android:layout_width="fill_parent"
@@ -94,5 +95,27 @@
         android:isIndicator="true"
         android:rating="0"
         />
+
+    <Button
+        android:id="@+id/buttonAddList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Travel List" />
+    
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtSelectedTravelList"
+        android:layout_alignTop="@+id/btnGetDirection"
+        android:layout_alignRight="@+id/frameLyt_PlaceDescription"
+        android:layout_alignEnd="@+id/frameLyt_PlaceDescription"
+        android:hint="selected travel list"
+        android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/buttonGetDirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Direction" />
 
 </LinearLayout>

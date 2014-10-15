@@ -142,7 +142,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         String value="";
     	value=autoComp.getText().toString();
     	Intent i = new Intent(this, SearchResultsActivity.class);
-    	i.putExtra("keyword", value);
+    	i.putExtra("keyword", value.toUpperCase());
     	startActivity(i); 
         
         /*text = textQuery.getText().toString();
