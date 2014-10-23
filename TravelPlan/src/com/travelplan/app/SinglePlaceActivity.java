@@ -2,7 +2,9 @@ package com.travelplan.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,16 +16,24 @@ import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class SinglePlaceActivity extends Activity {
@@ -43,44 +53,126 @@ public class SinglePlaceActivity extends Activity {
 	// KEY Strings
 	public static String KEY_REFERENCE = "reference"; // id of the place
 
-	Button btnAddList;
+	TextView selectedList;
 	TextView txtPlaceName;
-	ListView lstViewCreatedTravelLists;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_place);
+		try
+		{			
+			Intent i = getIntent();			
+			// Place referece id
+			String reference = i.getStringExtra(KEY_REFERENCE);			
+			// Calling a Async Background thread
+			new LoadSinglePlaceDetails().execute(reference);		
 		
-		Intent i = getIntent();
-		
-		// Place referece id
-		String reference = i.getStringExtra(KEY_REFERENCE);
-		
-		// Calling a Async Background thread
-		new LoadSinglePlaceDetails().execute(reference);
-		
-		btnAddList=(Button)findViewById(R.id.btnAddPlace);
-		txtPlaceName=(TextView)findViewById(R.id.name);
-		
-		btnAddList.setOnClickListener(new OnClickListener() {
+			Button btnAddList=(Button)findViewById(R.id.buttonAddList);
+			btnAddList.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Add List", Toast.LENGTH_SHORT).show();
+				}
+			});
+			//btnAddList.setOnClickListener(this);
 			
-			@Override
-			public void onClick(View v) {
-				/*lstViewCreatedTravelLists=new ListView(this);
-				AlertDialog.Builder builder = new AlertDialog.Builder(SinglePlaceActivity.this);
+			Button btnDirection=(Button)findViewById(R.id.buttonGetDirection);
+			btnDirection.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent i=new Intent(SinglePlaceActivity.this,DirectionsScreen.class);
+					startActivity(i);
+				}
+			});
+			//btnDirection.setOnClickListener(this);
+			
+			txtPlaceName=(TextView)findViewById(R.id.name);
+			selectedList=(TextView)findViewById(R.id.txtSelectedTravelList);
+		}
+        catch (Exception e)
+        {
+            Log.e("Error",e.toString());
+        }
+	}	
 
-
-		        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-		        lstViewCreatedTravelLists.setAdapter(adapter);
-		        builder.setTitle("Choose a travel list")
-		               .setView(lstViewCreatedTravelLists);
-		        
-				addPlaceToSelectedTravelList(txtPlaceName.getText(), travelList)*/
-			}
-		});
+	/*@Override
+	public void onClick(View v) {
+		
+        switch (v.getId())
+        {
+            case R.id.buttonAddList:
+            	addToList();
+                break;
+            case R.id.buttonGetDirection:
+            	directionScreen();
+                break;
+        }		
+	}*/
+	
+    final ArrayList<String> list = new ArrayList<String>();
+    ListView lstViewCreatedTravelLists;
+    String selectedTravelList;
+	
+	public void addToList()
+	{
+		// TODO Auto-generated method stub
+		/*lstViewCreatedTravelLists=new ListView(getApplicationContext());
+        list.clear();
+        loadFromFile();
+        AlertDialog.Builder builder = new AlertDialog.Builder(SinglePlaceActivity.this);
+        final StableArrayAdapter adapter = new StableArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, list);
+        lstViewCreatedTravelLists.setAdapter(adapter);
+        builder.setTitle("Choose a travel list")
+               .setView(lstViewCreatedTravelLists);
+        
+        lstViewCreatedTravelLists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Add the place to the selected list
+                selectedTravelList=lstViewCreatedTravelLists.getItemAtPosition(i).toString();
+                selectedList.setText(selectedTravelList);
+                addPlaceToSelectedTravelList(selectedList.getText().toString(),selectedList.getText().toString());
+                Toast.makeText(getApplicationContext(),"Place has been added to the list "+selectedList.getText().toString()+"!",Toast.LENGTH_SHORT).show();
+                SinglePlaceActivity.this.finish();
+            }
+        });
+        final Dialog dialog=builder.create();
+        dialog.show();*/
+		Toast.makeText(getApplicationContext(), "Add to List", Toast.LENGTH_SHORT).show();
 	}
+	
+	// start DirectionScreen - GURMEET
+	public void directionScreen()
+	{
+		Intent i=new Intent(SinglePlaceActivity.this,DirectionsScreen.class);
+		startActivity(i);
+	}
+	
+    private void loadFromFile(){
+
+        File sdcard = new File(Environment.getExternalStorageDirectory()+"/TravelPlan");
+        File file = new File(sdcard,"/TravelLists.txt");
+        StringBuilder text = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+                list.add(line);
+            }
+        }
+        catch (IOException e) {
+            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+        }
+    }
 	
 	 public void addPlaceToSelectedTravelList(String place, String travelList) {
 	        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
@@ -103,6 +195,30 @@ public class SinglePlaceActivity extends Activity {
 	        {
 	            Log.e("External Storage Status: -> ","Failed! <-");
 	        }
+	    }
+	 
+	    private class StableArrayAdapter extends ArrayAdapter<String> {
+
+	        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
+	        public StableArrayAdapter(Context context, int textViewResourceId, List<String> objects) {
+	            super(context, textViewResourceId, objects);
+	            for (int i = 0; i < objects.size(); ++i) {
+	                mIdMap.put(objects.get(i), i);
+	            }
+	        }
+
+			@Override
+	        public long getItemId(int position) {
+	            String item = getItem(position);
+	            return mIdMap.get(item);
+	        }
+
+	        @Override
+	        public boolean hasStableIds() {
+	            return true;
+	        }
+
 	    }
 	
 	/**
@@ -270,5 +386,6 @@ public class SinglePlaceActivity extends Activity {
 		}
 
 	}
+
 
 }

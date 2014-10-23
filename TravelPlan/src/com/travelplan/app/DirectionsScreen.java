@@ -52,6 +52,8 @@ public class DirectionsScreen extends Activity implements View.OnClickListener{
     }
 
     private void btnHomeClicked() {
-        startActivity(new Intent("com.travelplan.app.MainActivity"));
+        Intent i=new Intent(DirectionsScreen.this,MainActivity.class);
+        startActivity(i);
+        finish();
     }
 }

@@ -59,7 +59,7 @@ public class SearchResultsActivity extends Activity {
 		resultsTxt.setText("Searched Keyword: "+ value);
 		
         lvResults = (ListView) findViewById(R.id.listSearchResults);
-		txtRange=(TextView) findViewById(R.id.textViewRange);
+        /*txtRange=(TextView) findViewById(R.id.textViewRange);
 		
 		rangeModifier=(SeekBar) findViewById(R.id.seekBarRange);
 		rangeModifier.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -82,8 +82,9 @@ public class SearchResultsActivity extends Activity {
 				lstPlaces.clear();
 				
 			}
-		});
-		
+		});*/
+        
+        
 		// check connection
 		cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
@@ -105,7 +106,7 @@ public class SearchResultsActivity extends Activity {
             return;
         }
 
-        //new LoadPlaces().execute();
+        new LoadPlaces().execute();
         
         lvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -166,7 +167,7 @@ public class SearchResultsActivity extends Activity {
                 		"|park|restaurant|shopping_mall|zoo";
 
                 // Radius in meters
-                double radius = (range+1)*10000;
+                double radius = 150000;
 
                 // get nearest places
                 nearPlaces = googlePlaces.search(gps.getLatitude(), gps.getLongitude(), radius, types);

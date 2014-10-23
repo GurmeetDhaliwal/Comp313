@@ -100,7 +100,8 @@
         android:id="@+id/buttonAddList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add to Travel List" />
+        android:text="Add to Travel List"
+        android:onClick="btnAddTravelList" />
     
         <TextView
         android:layout_width="wrap_content"
