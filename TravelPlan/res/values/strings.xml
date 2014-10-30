@@ -36,6 +36,7 @@
     <string name="dialog_screen_message_delete_travel_list">Are you sure you want to delete this travel list? (It will be deleted permanently from the device!)</string>
     <string name="dialog_screen_ok">OK</string>
         <string name="dialog_screen_message">Are you sure you want to create this travel list?</string>
-    
+    <string name="btn_logout_from_google">Logout from Google</string>
+        
 
 </resources>
