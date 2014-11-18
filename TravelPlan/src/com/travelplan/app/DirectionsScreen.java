@@ -1,51 +1,83 @@
 package com.travelplan.app;
 
+import com.travelplan.app.R;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class DirectionsScreen extends Activity implements View.OnClickListener{
-
+public class DirectionsScreen extends FragmentActivity implements View.OnClickListener
+{
+	public static FragmentManager fragmentManager;
+	
+	GoogleMap googleMap;
+	TextView coordinates;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directions_screen);
 
-        Button btnHome=(Button)findViewById(R.id.btnHome);
-        btnHome.setOnClickListener(this);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.directions_screen, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        fragmentManager = getSupportFragmentManager();
+        try 
+        {
+            // Loading map
+            //initilizeMap();
+        	
+        	Intent i = getIntent();			
+			// Place referece id
+			String latitude = i.getStringExtra("directionLATITUDE");	
+			String longitude = i.getStringExtra("directionLONGITUDE");	
+			
+			coordinates=(TextView)findViewById(R.id.textViewCoordinates);
+			
+			coordinates.setText("Latitude: "+latitude+" | Longitude: "+longitude);
+			
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
         }
-        return super.onOptionsItemSelected(item);
+        
+        Button btnHome=(Button)findViewById(R.id.btnHomeBack);
+        btnHome.setOnClickListener(this);       
+
     }
+
+    private void initilizeMap() 
+    {
+        if (googleMap == null) 
+        {
+            googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
+
+            // check if map is created successfully or not
+            if (googleMap == null)
+            {
+                Toast.makeText(getApplicationContext(),"Sorry! unable to create maps",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    /*protected void onResume() 
+    {
+        super.onResume();
+        initilizeMap();
+    }*/
 
     @Override
     public void onClick(View view) {
         switch (view.getId())
         {
-
-            case R.id.btnHome:
+            case R.id.btnHomeBack:
                 btnHomeClicked();
                 break;
         }
