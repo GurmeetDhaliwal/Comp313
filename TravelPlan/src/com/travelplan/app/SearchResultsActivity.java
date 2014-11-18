@@ -35,9 +35,13 @@ public class SearchResultsActivity extends Activity {
     ListView lvResults;
     SeekBar rangeModifier;
     TextView txtRange;
+    TextView txtResultsNo;
     int range=0;
     // Searched keyword value
     String value;
+    
+    int noOfResults;
+    
     
     ArrayList<HashMap<String, String>> lstPlaces = new ArrayList<HashMap<String,String>>();
 	
@@ -58,6 +62,7 @@ public class SearchResultsActivity extends Activity {
 		TextView resultsTxt= (TextView) findViewById(R.id.txtResults);	
 		resultsTxt.setText("Searched Keyword: "+ value);
 		
+		txtResultsNo=(TextView)findViewById(R.id.txtTotalRecords);
         lvResults = (ListView) findViewById(R.id.listSearchResults);
         /*txtRange=(TextView) findViewById(R.id.textViewRange);
 		
@@ -200,6 +205,7 @@ public class SearchResultsActivity extends Activity {
                     // Successfully got places details
                     if (nearPlaces.results != null) {
                         // loop through each place
+                    	noOfResults=0;
                         for (Place p : nearPlaces.results) {
                         	if(p.name.toUpperCase().contains(value.toUpperCase()))
                         	{
@@ -211,6 +217,7 @@ public class SearchResultsActivity extends Activity {
 	                            map.put(KEY_NAME, p.name.toUpperCase());
 	                            // adding HashMap to ArrayList
 	                            lstPlaces.add(map);
+	                            noOfResults++;
                         	}
                         }
                         // list adapter
@@ -221,6 +228,7 @@ public class SearchResultsActivity extends Activity {
 
                         // Adding data into listview
                         lvResults.setAdapter(adapter);
+                        txtResultsNo.setText("Total Records: "+lvResults.getCount());
                     }
                 }
                 else if(status.equals("ZERO_RESULTS")){

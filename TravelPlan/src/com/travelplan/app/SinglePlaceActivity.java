@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -36,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.travelplan.app.PlacesScreen.StableArrayAdapter;
+
 public class SinglePlaceActivity extends Activity {
 	// flag for Internet connection status
 	Boolean isInternetPresent = false;
@@ -53,14 +56,26 @@ public class SinglePlaceActivity extends Activity {
 	// KEY Strings
 	public static String KEY_REFERENCE = "reference"; // id of the place
 
+	String placeName;
+	String listName;
 	TextView selectedList;
 	TextView txtPlaceName;
+	
+    final ArrayList<String> list = new ArrayList<String>();
+    ListView lstViewCreatedTravelLists;
+    
+    public Intent iDirections;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_place);
+		
+		selectedList=(TextView)findViewById(R.id.txtSelectedTravelList);
+		txtPlaceName=(TextView)findViewById(R.id.name);
+		placeName=(String) txtPlaceName.getText();
+		
 		try
 		{			
 			Intent i = getIntent();			
@@ -73,9 +88,48 @@ public class SinglePlaceActivity extends Activity {
 			btnAddList.setOnClickListener(new OnClickListener() {
 				
 				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Add List", Toast.LENGTH_SHORT).show();
+				public void onClick(View v) {				
+					
+					lstViewCreatedTravelLists = (ListView)new ListView(SinglePlaceActivity.this);
+
+			        list.clear();
+
+			        loadFromFile();
+			        AlertDialog.Builder builder = new AlertDialog.Builder(SinglePlaceActivity.this);
+
+
+			        final StableArrayAdapter adapter = new StableArrayAdapter(SinglePlaceActivity.this,android.R.layout.simple_list_item_1, list);
+			        lstViewCreatedTravelLists.setAdapter(adapter);
+			        builder.setTitle("Choose a travel list")
+			               .setView(lstViewCreatedTravelLists);
+
+			        lstViewCreatedTravelLists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			            @Override
+			            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+			                // Add the place to the selected list
+			            	
+			                listName=lstViewCreatedTravelLists.getItemAtPosition(i).toString();			                
+			                selectedList.setText(listName);
+			                
+			                addPlaceToSelectedTravelList(txtPlaceName.getText().toString(),selectedList.getText().toString());
+			                
+			                Toast.makeText(getApplicationContext(),"Place has been added to the list "+selectedList.getText().toString()+"!",Toast.LENGTH_SHORT).show();
+			                SinglePlaceActivity.this.finish();
+			            }
+			        });
+			        
+			        
+			        lstViewCreatedTravelLists.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+						@Override
+						public boolean onItemLongClick(AdapterView<?> parent,
+								View view, int position, long id) {
+							// TODO Auto-generated method stub
+							return false;
+						}
+					});
+			        final Dialog dialog=builder.create();
+			        dialog.show();
 				}
 			});
 			//btnAddList.setOnClickListener(this);
@@ -86,66 +140,21 @@ public class SinglePlaceActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Intent i=new Intent(SinglePlaceActivity.this,DirectionsScreen.class);
-					startActivity(i);
+					iDirections=new Intent(SinglePlaceActivity.this,DirectionsScreen.class);
+					
+                    iDirections.putExtra("directionLATITUDE", Double.toString(placeDetails.result.geometry.location.lat));
+                    iDirections.putExtra("directionLONGITUDE", Double.toString(placeDetails.result.geometry.location.lng));
+					
+					startActivity(iDirections);					
 				}
 			});
 			//btnDirection.setOnClickListener(this);
-			
-			txtPlaceName=(TextView)findViewById(R.id.name);
-			selectedList=(TextView)findViewById(R.id.txtSelectedTravelList);
 		}
         catch (Exception e)
         {
             Log.e("Error",e.toString());
         }
 	}	
-
-	/*@Override
-	public void onClick(View v) {
-		
-        switch (v.getId())
-        {
-            case R.id.buttonAddList:
-            	addToList();
-                break;
-            case R.id.buttonGetDirection:
-            	directionScreen();
-                break;
-        }		
-	}*/
-	
-    final ArrayList<String> list = new ArrayList<String>();
-    ListView lstViewCreatedTravelLists;
-    String selectedTravelList;
-	
-	public void addToList()
-	{
-		// TODO Auto-generated method stub
-		/*lstViewCreatedTravelLists=new ListView(getApplicationContext());
-        list.clear();
-        loadFromFile();
-        AlertDialog.Builder builder = new AlertDialog.Builder(SinglePlaceActivity.this);
-        final StableArrayAdapter adapter = new StableArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, list);
-        lstViewCreatedTravelLists.setAdapter(adapter);
-        builder.setTitle("Choose a travel list")
-               .setView(lstViewCreatedTravelLists);
-        
-        lstViewCreatedTravelLists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // Add the place to the selected list
-                selectedTravelList=lstViewCreatedTravelLists.getItemAtPosition(i).toString();
-                selectedList.setText(selectedTravelList);
-                addPlaceToSelectedTravelList(selectedList.getText().toString(),selectedList.getText().toString());
-                Toast.makeText(getApplicationContext(),"Place has been added to the list "+selectedList.getText().toString()+"!",Toast.LENGTH_SHORT).show();
-                SinglePlaceActivity.this.finish();
-            }
-        });
-        final Dialog dialog=builder.create();
-        dialog.show();*/
-		Toast.makeText(getApplicationContext(), "Add to List", Toast.LENGTH_SHORT).show();
-	}
 	
 	// start DirectionScreen - GURMEET
 	public void directionScreen()
@@ -224,11 +233,12 @@ public class SinglePlaceActivity extends Activity {
 	/**
 	 * Background Async Task to Load Google places
 	 * */
-	class LoadSinglePlaceDetails extends AsyncTask<String, String, String> {
+	class LoadSinglePlaceDetails extends AsyncTask<String, String, String> 
+	{
 
-		/**
-		 * Before starting background thread Show Progress Dialog
-		 * */
+		 //
+		 //* Before starting background thread Show Progress Dialog
+		 //*
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -239,9 +249,9 @@ public class SinglePlaceActivity extends Activity {
 			pDialog.show();
 		}
 
-		/**
-		 * getting Profile JSON
-		 * */
+		//**
+		// * getting Profile JSON
+		// * *
 		protected String doInBackground(String... args) {
 			String reference = args[0];
 			
@@ -258,21 +268,21 @@ public class SinglePlaceActivity extends Activity {
 			return null;
 		}
 
-		/**
-		 * After completing background task Dismiss the progress dialog
-		 * **/
+		/// *
+		// * After completing background task Dismiss the progress dialog
+		// * *
 		protected void onPostExecute(String file_url) {
 			// dismiss the dialog after getting all products
 			pDialog.dismiss();
 			// updating UI from Background Thread
 			runOnUiThread(new Runnable() {
 				public void run() {
-					/**
-					 * Updating parsed Places into LISTVIEW
-					 * */
+					///*
+					 //* Updating parsed Places into LISTVIEW
+					 //*
 					if(placeDetails != null){
 						String status = placeDetails.status;
-						
+						iDirections=new Intent();
 						// check place deatils status
 						// Check for all possible status
 						if(status.equals("OK")) if (placeDetails.result != null) {
@@ -284,7 +294,10 @@ public class SinglePlaceActivity extends Activity {
                             String image_url = placeDetails.result.icon;
                             String website = placeDetails.result.website;
 
-
+                            iDirections.putExtra("directionLATITUDE", latitude);
+                            iDirections.putExtra("directionLONGITUDE", longitude);
+                            
+                            
                             if (placeDetails.result.rating == null) {
                                 placeDetails.result.rating = 0.0;
                             } else {
@@ -377,8 +390,7 @@ public class SinglePlaceActivity extends Activity {
 						alert.showAlertDialog(SinglePlaceActivity.this, "Places Error",
 								"Sorry error occured.",
 								false);
-					}
-					
+					}				
 					
 				}
 			});

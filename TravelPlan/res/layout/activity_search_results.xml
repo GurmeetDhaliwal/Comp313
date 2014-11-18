@@ -15,6 +15,7 @@
         android:hint="Searched Keyword: "
         android:text="" />
 
+    
     <FrameLayout
         android:id="@+id/frameLayout1"
         android:layout_width="wrap_content"
@@ -56,5 +57,14 @@
         android:layout_marginTop="11dp"
         android:text="Range: "
         android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txtTotalRecords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/frameLayout1"
+        android:layout_alignRight="@+id/frameLayout1"
+        android:layout_marginRight="16dp"
+        android:text="Total Records: " />
 
 </RelativeLayout>

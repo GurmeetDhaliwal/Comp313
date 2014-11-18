@@ -189,7 +189,7 @@ public class PlacesScreen extends Activity implements View.OnClickListener{
         }
     }
 
-    private class StableArrayAdapter extends ArrayAdapter<String> {
+    public class StableArrayAdapter extends ArrayAdapter<String> {
 
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
