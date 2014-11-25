@@ -144,7 +144,8 @@ public class SinglePlaceActivity extends Activity {
 					
                     iDirections.putExtra("directionLATITUDE", Double.toString(placeDetails.result.geometry.location.lat));
                     iDirections.putExtra("directionLONGITUDE", Double.toString(placeDetails.result.geometry.location.lng));
-					
+                    iDirections.putExtra("directionNAME", placeDetails.result.name);
+    				
 					startActivity(iDirections);					
 				}
 			});
@@ -296,11 +297,13 @@ public class SinglePlaceActivity extends Activity {
 
                             iDirections.putExtra("directionLATITUDE", latitude);
                             iDirections.putExtra("directionLONGITUDE", longitude);
+                            iDirections.putExtra("directionNAME", name);
                             
                             
                             if (placeDetails.result.rating == null) {
                                 placeDetails.result.rating = 0.0;
-                            } else {
+                            } 
+                            else {
                                 String rating = Double.toString(placeDetails.result.rating);
                                 TextView lbl_rating = (TextView) findViewById(R.id.rating);
                                 lbl_rating.setText(Html.fromHtml("<b>Rating:</b> " + rating));

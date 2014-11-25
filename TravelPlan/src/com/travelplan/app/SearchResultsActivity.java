@@ -169,7 +169,10 @@ public class SearchResultsActivity extends Activity {
                 String types = 
                 		"airport|amusement_park|aquarium|art_gallery|bar" +
                 		"|cafe|casino|lodging|museum|night_club" +
-                		"|park|restaurant|shopping_mall|zoo";
+                		"|park|restaurant|shopping_mall|zoo|bus_station|subway_station" +
+                		"|movie_theater|travel_agency|store|liquor_store|taxi_stand" +
+                		"|hospital|food|post_office|bakery|embassy|car_rental|convenience_store" +
+                		"|doctor|health|spa|stadium|campground|grocery_or_supermarket";
 
                 // Radius in meters
                 double radius = 150000;
