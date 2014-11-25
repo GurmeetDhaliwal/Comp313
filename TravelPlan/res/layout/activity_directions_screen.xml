@@ -7,19 +7,20 @@ android:layout_height="fill_parent" >
         android:id="@+id/textViewCoordinates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Direction Information" />
-
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/silver"
+        android:lines="2"
+        android:text="Direction Info"
+        android:textColor="@color/blue" />
 <fragment
     android:id="@+id/location_map"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_above="@+id/btnHomeBack"
     android:layout_alignParentLeft="true"
-    android:layout_below="@+id/textView1"
-    android:layout_marginTop="25dp"
-    class="com.google.android.gms.maps.SupportMapFragment"
-    
- />
+    android:layout_below="@+id/textViewCoordinates"
+    class="com.google.android.gms.maps.MapFragment" />
 
 <Button
     android:id="@+id/btnHomeBack"
