@@ -67,7 +67,7 @@ public class MainActivity extends Activity implements View.OnClickListener,Conne
  private SignInButton btnSignIn;
  private Button btnSignOut;
  private ImageView imgProfilePic;
- private TextView txtName, txtEmail;
+ private TextView txtName, txtEmail, txtConnected;
  private LinearLayout llProfileLayout;
  
  
@@ -100,6 +100,7 @@ public class MainActivity extends Activity implements View.OnClickListener,Conne
 		imgProfilePic = (ImageView) findViewById(R.id.imgProfilePic);
 		txtName = (TextView) findViewById(R.id.txtName);
 		txtEmail = (TextView) findViewById(R.id.txtEmail);
+		txtConnected=(TextView)findViewById(R.id.txtIsConnected);
 		llProfileLayout = (LinearLayout) findViewById(R.id.llProfile);
 
         
@@ -202,7 +203,7 @@ if (!mIntentInProgress) {
 		resolveSignInError();
 	}
 }
-
+	txtConnected.setText(R.string.gPlusSignedFail);
 }
 
 @Override
@@ -231,7 +232,7 @@ getProfileInformation();
 
 // Update the UI after signin
 updateUI(true);
-
+txtConnected.setText(R.string.gPlusSignedSuccess);
 }
 private void updateUI(boolean isSignedIn) {
 if (isSignedIn) {
@@ -390,11 +391,18 @@ public void onClick(View view) {
         startActivity(new Intent("com.travelplan.app.NearBySearch"));
     }
     private void btnSearchClicked(){
-        String value="";
-    	value=autoComp.getText().toString();
-    	Intent i= new Intent(this, SearchResultsActivity.class);
-    	i.putExtra("keyword", value.toUpperCase());
-    	startActivity(i); 
+        if(autoComp.length()>0)
+        {
+	    	String value="";
+	    	value=autoComp.getText().toString();
+	    	Intent i= new Intent(this, SearchResultsActivity.class);
+	    	i.putExtra("keyword", value.toUpperCase());
+	    	startActivity(i); 
+        }
+        else
+        {
+        	Toast.makeText(getApplicationContext(), "Please enter a keyword", Toast.LENGTH_SHORT).show();
+        }
         
         /*text = textQuery.getText().toString();
         if(textQuery.length()==0)

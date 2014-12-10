@@ -27,7 +27,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Trip"
+        android:text="@string/btnCreateTrip"
         android:id="@+id/btnCreateTrip"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -122,5 +122,14 @@
         android:layout_marginBottom="30dp"
         android:text="@string/btn_logout_from_google"
         android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtIsConnected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/btn_sign_in"
+        android:layout_below="@+id/btn_sign_in"
+        android:text="TextView"
+        android:visibility="invisible" />
     
 </RelativeLayout>
