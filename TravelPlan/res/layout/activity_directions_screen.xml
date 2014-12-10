@@ -3,32 +3,39 @@
 android:layout_width="fill_parent"
 android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/textViewCoordinates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/silver"
-        android:lines="2"
-        android:text="Direction Info"
-        android:textColor="@color/blue" />
 <fragment
     android:id="@+id/location_map"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_above="@+id/btnHomeBack"
+    android:layout_alignParentBottom="true"
     android:layout_alignParentLeft="true"
     android:layout_below="@+id/textViewCoordinates"
     class="com.google.android.gms.maps.MapFragment" />
 
-<Button
-    android:id="@+id/btnHomeBack"
+<TextView
+    android:id="@+id/txtMyLocation"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="16dp"
-    android:text="Home" />
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="22dp"
+    android:lines="2"
+    android:text=" Current Coordinations: "
+    android:textSize="16dp"
+    android:textStyle="normal" />
+
+<TextView
+    android:id="@+id/textViewCoordinates"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/txtMyLocation"
+    android:lines="2"
+    android:text=" Direction Info"
+    android:textColor="@color/silver"
+    android:textSize="16dp"
+    android:textStyle="normal" />
 
 </RelativeLayout>
